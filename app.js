@@ -1,23 +1,22 @@
-```
-// Import the Firebase library
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
+  authDomain: "addreview-2c617.firebaseapp.com",
+  databaseURL: "https://addreview-2c617-default-rtdb.firebaseio.com",
+  projectId: "addreview-2c617",
+  storageBucket: "addreview-2c617.appspot.com",
+  messagingSenderId: "346798136905",
+  appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
+};
 
 // Initialize Firebase
-const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-auth-domain",
-  projectId: "your-project-id",
-  storageBucket: "your-storage-bucket",
-  messagingSenderId: "your-messaging-sender-id",
-  appId: "your-app-id"
-};
-const firebaseApp = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore
-const db = getFirestore(firebaseApp);
-
-```
 function addReview(name, comment) {
   // Generate a unique review number
   const reviewNumber = db.collection("reviews").doc().id;
