@@ -5,6 +5,25 @@
   </head>
   <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
+      authDomain: "addreview-2c617.firebaseapp.com",
+      projectId: "addreview-2c617",
+      storageBucket: "addreview-2c617.appspot.com",
+      messagingSenderId: "346798136905",
+      appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
+    };
+    
+    
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const reviewsRef = db.ref("reviews");
+    const reviewForm = document.querySelector("#review-form");
+    const reviewInput = document.querySelector("#review");
+    const reviewerInput = document.querySelector("#name");
+    const reviewsDiv = document.querySelector("#reviews");
+  </script>
   <body>
     <h1>Leave a Review</h1>
     <form id="review-form">
