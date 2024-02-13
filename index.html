@@ -1,38 +1,46 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Add Review</title>
-  </head>
-  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
-      authDomain: "addreview-2c617.firebaseapp.com",
-      projectId: "addreview-2c617",
-      storageBucket: "addreview-2c617.appspot.com",
-      messagingSenderId: "346798136905",
-      appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
-    };
-    
-    
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    const reviewsRef = db.ref("reviews");
-    const reviewForm = document.querySelector("#review-form");
-    const reviewInput = document.querySelector("#review");
-    const reviewerInput = document.querySelector("#name");
-    const reviewsDiv = document.querySelector("#reviews");
-  </script>
-  <body>
-    <h1>Leave a Review</h1>
-    <form id="review-form">
-      <input type="text" id="name" placeholder="Name" required />
-      <textarea id="review" placeholder="Review" required></textarea>
-      <button type="submit">Submit</button>
-    </form>
-    <h2>Reviews</h2>
-    <div id="reviews"></div>
-    <script src="app.js"></script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gooster Energy Drink Reviews</title>
+</head>
+<body>
+  <h1>Gooster Energy Drink Reviews</h1>
+  <form id="review-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="comment">Comment:</label>
+    <textarea id="comment" name="comment" required></textarea>
+    <br>
+    <button type="submit">Submit Review</button>
+  </form>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+  <script src="app.js"></script>
+</body>
 </html>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  #review-form {
+    margin-top: 20px;
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input, textarea {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+</style>
