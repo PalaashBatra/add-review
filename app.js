@@ -1,9 +1,7 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-// Your web app's Firebase configuration
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
   authDomain: "addreview-2c617.firebaseapp.com",
@@ -13,20 +11,20 @@ const firebaseConfig = {
   messagingSenderId: "346798136905",
   appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
 };
+const firebaseApp = initializeApp(firebaseConfig);
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firestore
+const db = getFirestore(firebaseApp);
 
-function addReview(name, comment) {
-  // Generate a unique review number
-  const reviewNumber = db.collection("reviews").doc().id;
-
-  // Add the review to the database
-  db.collection("reviews")
-    .doc(`review${reviewNumber}`)
-    .set({
-      name: name,
-      comment: comment
-    });
+// Add a review to the Firestore database
+async function addReview(name, comment) {
+  const reviewRef = collection(db, "reviews");
+  const reviewDoc = await addDoc(reviewRef, {
+    name: name,
+    comment: comment
+  });
+  console.log("Review added with ID: ", reviewDoc.id);
 }
 
+// Example usage
+addReview("John Doe", "I love Gooster Energy Drink!");
