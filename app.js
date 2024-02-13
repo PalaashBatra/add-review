@@ -1,39 +1,33 @@
+```
+// Import the Firebase library
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+// Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
-  authDomain: "addreview-2c617.firebaseapp.com",
-  projectId: "addreview-2c617",
-  storageBucket: "addreview-2c617.appspot.com",
-  messagingSenderId: "346798136905",
-  appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
+  apiKey: "your-api-key",
+  authDomain: "your-auth-domain",
+  projectId: "your-project-id",
+  storageBucket: "your-storage-bucket",
+  messagingSenderId: "your-messaging-sender-id",
+  appId: "your-app-id"
 };
+const firebaseApp = initializeApp(firebaseConfig);
 
+// Initialize Firestore
+const db = getFirestore(firebaseApp);
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const reviewsRef = db.ref("reviews");
-const reviewForm = document.querySelector("#review-form");
-const reviewInput = document.querySelector("#review");
-const reviewerInput = document.querySelector("#name");
-const reviewsDiv = document.querySelector("#reviews");
+```
+function addReview(name, comment) {
+  // Generate a unique review number
+  const reviewNumber = db.collection("reviews").doc().id;
 
-reviewForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const review = reviewInput.value;
-  const reviewer = reviewerInput.value;
+  // Add the review to the database
+  db.collection("reviews")
+    .doc(`review${reviewNumber}`)
+    .set({
+      name: name,
+      comment: comment
+    });
+}
 
-  reviewsRef.once("value", (snapshot) => {
-    const reviewCount = snapshot.numChildren();
-    const newReviewRef = reviewsRef.child(reviewCount);
-    newReviewRef.set({ review, reviewer });
-  });
-
-  reviewInput.value = "";
-  reviewerInput.value = "";
-});
-
-reviewsRef.on("child_added", (snapshot) => {
-  const newReview = snapshot.val();
-  const newReviewDiv = document.createElement("div");
-  newReviewDiv.textContent = `Reviewer: ${newReview.reviewer}, Review: ${newReview.review}`;
-  reviewsDiv.appendChild(newReviewDiv);
-});
