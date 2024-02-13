@@ -21,8 +21,11 @@ reviewForm.addEventListener("submit", (e) => {
   const review = reviewInput.value;
   const reviewer = reviewerInput.value;
 
-  const newReviewRef = reviewsRef.push();
-  newReviewRef.set({ review, reviewer });
+  reviewsRef.once("value", (snapshot) => {
+    const reviewCount = snapshot.numChildren();
+    const newReviewRef = reviewsRef.child(reviewCount);
+    newReviewRef.set({ review, reviewer });
+  });
 
   reviewInput.value = "";
   reviewerInput.value = "";
