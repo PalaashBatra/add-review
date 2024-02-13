@@ -1,6 +1,12 @@
 const firebaseConfig = {
-  // Your Firebase configuration goes here.
+  apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
+  authDomain: "addreview-2c617.firebaseapp.com",
+  projectId: "addreview-2c617",
+  storageBucket: "addreview-2c617.appspot.com",
+  messagingSenderId: "346798136905",
+  appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
