@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gooster Energy Drink Reviews</title>
-</head>
-<body>
-  <h1>Gooster Energy Drink Reviews</h1>
-  <form id="review-form">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <br>
-    <label for="comment">Comment:</label>
-    <textarea id="comment" name="comment" required></textarea>
-    <br>
-    <button type="submit">Submit Review</button>
-  </form>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-  <script src="app.js"></script>
-</body>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gooster Energy Drink Reviews</title>
+  </head>
+  <body>
+    <h1>Gooster Energy Drink Reviews</h1>
+    <form id="review-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <br />
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" required></textarea>
+      <br />
+      <button type="submit">Submit Review</button>
+    </form>
+    <script src="/path/to/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
+        authDomain: "addreview-2c617.firebaseapp.com",
+        databaseURL: "https://addreview-2c617-default-rtdb.firebaseio.com",
+        projectId: "addreview-2c617",
+        storageBucket: "addreview-2c617.appspot.com",
+        messagingSenderId: "346798136905",
+        appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
+      };
+      const firebaseApp = initializeApp(firebaseConfig);
+
+      // Initialize Firestore
+      const db = getFirestore(firebaseApp);
+
+      // Add a review to the Firestore database
+      async function addReview(name, comment) {
+        const reviewRef = collection(db, "reviews");
+        const reviewDoc = await addDoc(reviewRef, {
+          name: name,
+          comment: comment
+        });
+        console.log("Review added with ID: ", reviewDoc.id);
+      }
+
+      // Handle form submission
+      const form = document.getElementById("review-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const comment = document.getElementById("comment").value;
+        addReview(name, comment);
+        form.reset();
+      });
+    </script>
+  </body>
 </html>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-
-  #review-form {
-    margin-top: 20px;
-  }
-
-  label {
-    display: block;
-    margin-top: 10px;
-  }
-
-  input, textarea {
-    width: 100%;
-    margin-top: 5px;
-  }
-
-  button {
-    margin-top: 10px;
-  }
-</style>
