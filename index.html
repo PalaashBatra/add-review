@@ -1,9 +1,29 @@
-t<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Gooster Energy Drink Reviews</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+  <script>
+    document.getElementById('review-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
+
+      // Create a new div to hold the reviewer's name and comment
+      const newReview = document.createElement('div');
+      newReview.innerHTML = `
+        <h2>${name}</h2>
+        <p>${comment}</p>
+      `;
+
+      // Append the new review to the body of the page
+      document.body.appendChild(newReview);
+
+      // Clear the form fields
+      document.getElementById('name').value = '';
+      document.getElementById('comment').value = '';
+    });
+  </script>
 </head>
 <body>
   <h1>Gooster Energy Drink Reviews</h1>
@@ -16,41 +36,5 @@ t<!DOCTYPE html>
     <br>
     <button type="submit">Submit Review</button>
   </form>
-  <script>
-    // Replace the following with your Firebase project's configuration
-    const firebaseConfig = {
-  apiKey: "AIzaSyCD0yMui0XOvja7ZdfINoku7IeVU5QAj44",
-  authDomain: "addreview-2c617.firebaseapp.com",
-  databaseURL: "https://addreview-2c617-default-rtdb.firebaseio.com",
-  projectId: "addreview-2c617",
-  storageBucket: "addreview-2c617.appspot.com",
-  messagingSenderId: "346798136905",
-  appId: "1:346798136905:web:4fc902a5fde9a09eaea998"
-};
-
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Get a reference to the Firestore database
-    const db = firebase.firestore();
-
-    // Add a review to the Firestore database when the form is submitted
-    const form = document.getElementById("review-form");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("name").value;
-      const comment = document.getElementById("comment").value;
-      db.document("review1").add({
-        name: name,
-        comment: comment
-      }).then(() => {
-        console.log("Review added successfully");
-        form.reset();
-      }).catch((error) => {
-        console.error("Error adding review: ", error);
-      });
-    });
-  </script>
 </body>
 </html>
