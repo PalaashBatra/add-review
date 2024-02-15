@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+t<!DOCTYPE html>
 <html>
 <head>
   <title>Gooster Energy Drink Reviews</title>
@@ -41,7 +41,7 @@
       e.preventDefault();
       const name = document.getElementById("name").value;
       const comment = document.getElementById("comment").value;
-      db.collection("reviews").add({
+      db.document("review1").add({
         name: name,
         comment: comment
       }).then(() => {
